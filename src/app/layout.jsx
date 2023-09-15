@@ -16,6 +16,7 @@ export default function RootLayout({ children }) {
           <h1>navbar</h1>
           <ul>
             <li><a href="/">Home</a></li>
+            <li><a href="/vehicles">Vehicles</a></li>
             <li><a href="/user/signUp">Sign Up</a></li>
             <li><a href="/user/login">Login</a></li>
           </ul>
