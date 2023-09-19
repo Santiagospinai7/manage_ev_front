@@ -49,8 +49,10 @@ const VehicleRegistrationForm = () => {
           </form>
         </div>
         <div className="h-32 md:h-auto md:w-1/2">
+          <picture>
                   <img className="object-cover w-full h-full" src="https://storage.googleapis.com/site.esss.co/77ec3784-thumb-blog-eletrificacao-tendencias-de-veiculos-eletricos-no-brasil-1.png"
                       alt="img" />
+                      </picture>
               </div>
         </div>
     </div>

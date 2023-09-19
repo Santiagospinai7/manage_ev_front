@@ -1,9 +1,8 @@
 'use client'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
-
-const Sidebar = () => {
+const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -20,25 +19,24 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <>
-    {!isMobile && (
-      <div className="w-48 bg-blue-500 text-white p-4 flex-shrink-0">
-      <div className="text-2xl font-semibold mb-6">Manage Ev</div>
-      <ul>
+    <div className="flex justify-between items-center p-4 text-white bg-blue-500 h-16">
+      <div className="text-2xl font-semibold">{isMobile ? 'Manage Ev' : ''}</div>
+      <nav>
+        <ul className="flex space-x-4">
         <li className="mb-2">
-          <Link href="/">Home</Link>
+          <Link href="/user/login">
+            Login
+          </Link>
         </li>
         <li className="mb-2">
-          <Link href="/vehicles">Vehicles</Link>
+          <Link href="/user/signUp">
+            SignUp
+          </Link>
         </li>
-        <li className="mb-2">
-          <Link href="/user/login">Charging Stations</Link>
-        </li>
-      </ul>
+        </ul>
+      </nav>
     </div>
-    )}
-    </>
   )
 }
 
-export default Sidebar;
+export default Navbar

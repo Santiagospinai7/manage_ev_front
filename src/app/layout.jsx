@@ -1,19 +1,22 @@
 import './globals.css'
 import { roboto } from '../styles/fonts'
 import Sidebar from '../components/Sidebar'
-
-export const metadata = {
-  title: 'Manage Ev',
-  description: 'Manage Ev is a simple app to manage your electric vehicles.',
-}
+import Navbar from '@/components/Navbar'
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body className={roboto.className} suppressHydrationWarning={true}>
-        {children}
+        <div className="flex">
+          <Sidebar />
+          <div className="flex-1">
+            <Navbar />
+            {children}
+          </div>
+        </div>
       </body>
     </html>
-  )
+  );
 }
+
 
