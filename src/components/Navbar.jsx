@@ -19,20 +19,20 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="flex justify-between items-center p-4 text-white bg-blue-500 h-16">
-      <div className="text-2xl font-semibold">{isMobile ? 'Manage Ev' : ''}</div>
+    <div className="flex justify-between items-center p-4 text-white bg-blue-500 h-16 fixed w-full top-0 left-0">
+      <div className="text-2xl font-semibold">Manage Ev</div>
       <nav>
         <ul className="flex space-x-4">
-        <li className="mb-2">
-          <Link href="/user/login">
-            Login
-          </Link>
-        </li>
-        <li className="mb-2">
-          <Link href="/user/signUp">
-            SignUp
-          </Link>
-        </li>
+          <li className="mb-2">
+            <Link href="/user/login">
+              Login
+            </Link>
+          </li>
+          <li className="mb-2">
+            <Link href="/user/signUp">
+              SignUp
+            </Link>
+          </li>
         </ul>
       </nav>
     </div>
