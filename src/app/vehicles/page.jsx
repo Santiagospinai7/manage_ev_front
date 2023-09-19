@@ -2,7 +2,7 @@ import React from 'react';
 
 const VehicleRegistrationForm = () => {
   return (
-    <div className="ml-64 p-4 min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="max-w-md mx-auto mt-8 p-4 border rounded-lg shadow-lg flex">
         <div className="w-2/3 pr-4">
           <h2 className="text-2xl font-semibold mb-4">Registro de Vehículo</h2>
@@ -48,9 +48,11 @@ const VehicleRegistrationForm = () => {
             </button>
           </form>
         </div>
-        <div class="h-32 md:h-auto md:w-1/2">
-                  <img class="object-cover w-full h-full" src="https://storage.googleapis.com/site.esss.co/77ec3784-thumb-blog-eletrificacao-tendencias-de-veiculos-eletricos-no-brasil-1.png"
+        <div className="h-32 md:h-auto md:w-1/2">
+          <picture>
+                  <img className="object-cover w-full h-full" src="https://storage.googleapis.com/site.esss.co/77ec3784-thumb-blog-eletrificacao-tendencias-de-veiculos-eletricos-no-brasil-1.png"
                       alt="img" />
+                      </picture>
               </div>
         </div>
     </div>
