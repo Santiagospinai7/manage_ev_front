@@ -10,7 +10,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body className={roboto.className} >
+      <body className={roboto.className} suppressHydrationWarning={true}>
         <Sidebar />
         {children}
       </body>
