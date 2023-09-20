@@ -26,13 +26,13 @@ const Sidebar = () => {
         <div className="text-2xl font-semibold mb-6">Manage Ev</div>
         <ul>
           <li className="mb-2">
-            <Link href="/">Home</Link>
+            <Link href="/map">Map</Link>
           </li>
           <li className="mb-2">
             <Link href="/vehicles">Vehicles</Link>
           </li>
           <li className="mb-2">
-            <Link href="/user/login">Charging Stations</Link>
+            <Link href="/chargePoint">Charging Stations</Link>
           </li>
         </ul>
       </div>

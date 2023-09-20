@@ -1,63 +1,66 @@
 import React from 'react';
 
-const VehicleRegistrationForm = () => {
+// Imagen de carro por defecto (puedes cambiar la URL)
+const DEFAULT_VEHICLE_IMAGE = 'https://static.vecteezy.com/system/resources/thumbnails/013/923/543/small_2x/blue-car-logo-png.png'
+const VEHICLES = [
+  {
+    brand: 'Ferrari',
+    model: 'Enzo',
+    year: '2020',
+    image: DEFAULT_VEHICLE_IMAGE,
+  },
+  {
+    brand: 'Lamborghini',
+    model: 'Urus',
+    year: '2022',
+    image: DEFAULT_VEHICLE_IMAGE,
+  },
+  {
+    brand: 'Tesla',
+    model: 'X',
+    year: '2023',
+    image: DEFAULT_VEHICLE_IMAGE,
+  },
+  // Agregar más vehículos aquí...
+];
+
+const ListVehicles = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="max-w-md mx-auto mt-8 p-4 border rounded-lg shadow-lg flex">
-        <div className="w-2/3 pr-4">
-          <h2 className="text-2xl font-semibold mb-4">Registro de Vehículo</h2>
-          <form>
-            <div className="mb-4">
-              <label className="block text-gray-600 text-sm font-medium mb-2">
-                Marca del vehículo:
-              </label>
-              <input
-                type="text"
-                name="brand"
-                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
-                placeholder="Ejemplo: Toyota"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-600 text-sm font-medium mb-2">
-                Modelo del vehículo:
-              </label>
-              <input
-                type="text"
-                name="model"
-                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
-                placeholder="Ejemplo: Corolla"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-600 text-sm font-medium mb-2">
-                Año del vehículo:
-              </label>
-              <input
-                type="number"
-                name="year"
-                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
-                placeholder="Ejemplo: 2023"
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
+    <div className="container mx-auto mt-10">
+      <div className="mb-6">
+        <h2 className="text-2xl font-semibold mb-4">Lista de Vehículos</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {VEHICLES.map((vehicle, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition duration-300 grid grid-cols-2 gap-4 border border-blue-500"
             >
-              Registrar Vehículo
-            </button>
-          </form>
-        </div>
-        <div className="h-32 md:h-auto md:w-1/2">
-          <picture>
-                  <img className="object-cover w-full h-full" src="https://storage.googleapis.com/site.esss.co/77ec3784-thumb-blog-eletrificacao-tendencias-de-veiculos-eletricos-no-brasil-1.png"
-                      alt="img" />
-                      </picture>
+              <div className="col-span-1">
+                <img
+                  src={vehicle.image || DEFAULT_VEHICLE_IMAGE}
+                  alt={`Imagen de ${vehicle.brand} ${vehicle.model}`}
+                  className="w-26 h-26 rounded-full mx-auto"
+                />
               </div>
+              <div className="col-span-1">
+                <h3 className="text-lg font-semibold">{vehicle.brand}</h3>
+                <p className="text-gray-500">{vehicle.model}</p>
+                <p className="text-gray-500">{vehicle.year}</p>
+              </div>
+            </div>
+          ))}
         </div>
+      </div>
+      <div className="text-center">
+        <a
+          href="/vehicles/new"
+          className="block w-32 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 mx-auto"
+        >
+          Registrar Vehículo
+        </a>
+      </div>
     </div>
   );
 };
 
-export default VehicleRegistrationForm;
-
+export default ListVehicles;
