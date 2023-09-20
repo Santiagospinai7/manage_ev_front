@@ -46,7 +46,7 @@ const ChargingPointForm = () => {
   };
 
   return (
-    <div className="container mx-auto mt-10">
+    <div className="container mx-auto mt-20">
       <br></br>
       <br></br>
       <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 border rounded-lg shadow-lg">

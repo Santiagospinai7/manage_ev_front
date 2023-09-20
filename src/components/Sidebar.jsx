@@ -25,14 +25,17 @@ const Sidebar = () => {
       <div className="fixed left-0 top-0 bottom-0 w-48 bg-blue-500 text-white p-4">
         <div className="text-2xl font-semibold mb-6">Manage Ev</div>
         <ul>
-          <li className="mb-2">
-            <Link href="/map">Map</Link>
+          <li className="my-10 mb-5">
+            <Link href="/map">Mapa</Link>
           </li>
-          <li className="mb-2">
-            <Link href="/vehicles">Vehicles</Link>
+          <li className="mt-5">
+            <Link href="/vehicles">Mis autos</Link>
           </li>
-          <li className="mb-2">
-            <Link href="/chargePoint">Charging Stations</Link>
+          <li className="mt-5">
+            <Link href="/chargePoint">Estaciones</Link>
+          </li>
+          <li className="mt-5">
+            <Link href="/statistics">Estadisticas</Link>
           </li>
         </ul>
       </div>

@@ -43,8 +43,8 @@ const VehicleRegistrationForm = () => {
   };
 
   return (
-    <div className="ml-64 p-4 min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="max-w-md mx-auto mt-8 p-4 border rounded-lg shadow-lg flex">
+    <div className="p-4 min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="max-w-md mx-auto p-4 border rounded-lg shadow-lg flex">
         <div className="w-2/3 pr-4">
           <h2 className="text-2xl font-semibold mb-4">Registro de Vehículo</h2>
           <form onSubmit={handleSubmit}>
