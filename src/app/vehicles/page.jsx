@@ -26,38 +26,35 @@ const VEHICLES = [
 
 const ListVehicles = () => {
   return (
-    <div className="container mx-auto mt-10">
-      <div className="mb-6">
-        <h2 className="text-2xl font-semibold mb-4">Lista de Vehículos</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {VEHICLES.map((vehicle, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition duration-300 grid grid-cols-2 gap-4 border border-blue-500"
-            >
-              <div className="col-span-1">
-                <img
-                  src={vehicle.image || DEFAULT_VEHICLE_IMAGE}
-                  alt={`Imagen de ${vehicle.brand} ${vehicle.model}`}
-                  className="w-26 h-26 rounded-full mx-auto"
-                />
-              </div>
-              <div className="col-span-1">
+    <div className="container mx-auto mt-20">
+      <div className="text-center mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+          <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+          <path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"></path>
+        </svg>
+        
+        <h2 className="text-2xl font-medium mb-2">Mis autos</h2>
+        <div className="flex justify-between items-center bg-blue-500 mx-10 p-2 rounded-full">
+          <div>
+          </div>
+          <a href="/vehicles/new" className="text-white pr-4">+ Nuevo vehículo</a>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-10">
+        {VEHICLES.map((vehicle, index) => (
+          <div key={index} className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition duration-300 border border-blue-500">
+            <div className="flex items-center mb-4">
+              <img src={vehicle.image || DEFAULT_VEHICLE_IMAGE} alt={`Imagen de ${vehicle.brand} ${vehicle.model}`} className="w-16 h-16 rounded-full" />
+              <div className="ml-4">
                 <h3 className="text-lg font-semibold">{vehicle.brand}</h3>
                 <p className="text-gray-500">{vehicle.model}</p>
                 <p className="text-gray-500">{vehicle.year}</p>
               </div>
             </div>
-          ))}
-        </div>
-      </div>
-      <div className="text-center">
-        <a
-          href="/vehicles/new"
-          className="block w-32 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 mx-auto"
-        >
-          Registrar Vehículo
-        </a>
+          </div>
+        ))}
       </div>
     </div>
   );
