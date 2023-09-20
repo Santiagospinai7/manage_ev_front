@@ -9,9 +9,9 @@ export default function RootLayout({ children }) {
       <body className={roboto.className} suppressHydrationWarning={true}>
         <div className="flex">
           <Sidebar />
-          <div className="flex-1">
+          <div className="flex-1 ml-0 md:ml-48"> {/* Remove ml-48 on mobile */}
             <Navbar />
-            {children}
+            <div className="mt-16 h-full">{children}</div>
           </div>
         </div>
       </body>
