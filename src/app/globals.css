@@ -12,3 +12,9 @@ body {
   color: var(--foreground-rgb);
   background: white
 }
+
+@media (max-width: 640px) {
+  .hide-on-mobile {
+    display: none;
+  }
+}

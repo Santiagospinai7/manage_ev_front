@@ -1,67 +1,77 @@
+import Image from 'next/image'
+
 export default function Login() {
   return (
-    <div class="flex items-center min-h-screen bg-gray-50">
-      <div class="flex-1 h-full max-w-4xl mx-auto bg-white rounded-lg shadow-xl">
-          <div class="flex flex-col md:flex-row">
-              <div class="h-32 md:h-auto md:w-1/2">
-                  <img class="object-cover w-full h-full" src="https://source.unsplash.com/user/erondu/1600x900"
-                      alt="img" />
+    <div className="flex items-center min-h-screen bg-gray-50">
+      <div className="flex-1 h-full max-w-4xl mx-auto bg-white rounded-lg shadow-xl">
+          <div className="flex flex-col md:flex-row">
+              <div className="h-32 md:h-auto md:w-1/2">
+                <picture>
+                  <img 
+                    className="object-cover w-full h-full" 
+                    src="https://i.pinimg.com/564x/70/52/c9/7052c916e1a5638702614e284d5312c7.jpg"
+                    alt="img" 
+                  />
+                </picture>
               </div>
-              <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
-                  <div class="w-full">
-                      <div class="flex justify-center">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="w-20 h-20 text-blue-600" fill="none"
+              <div className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+                  <div className="w-full">
+                      <div className="flex justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="w-20 h-20 text-blue-600" fill="none"
                               viewBox="0 0 24 24" stroke="currentColor">
                               <path d="M12 14l9-5-9-5-9 5 9 5z" />
                               <path
                                   d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                   d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                           </svg>
                       </div>
-                      <h1 class="mb-4 text-2xl font-bold text-center text-gray-700"> 
+                      <h1 className="mb-4 text-2xl font-bold text-center text-gray-700"> 
                           Login to Your Account
                       </h1>
                       <div>
-                          <label class="block text-sm">
+                          <label className="block text-sm">
                               Email
                           </label>
                           <input type="email"
-                              class="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                              className="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
                               placeholder="" />
                       </div>
                       <div>
-                          <label class="block mt-4 text-sm">
+                          <label className="block mt-4 text-sm">
                               Password
                           </label>
                           <input
-                              class="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                              className="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
                               placeholder="" type="password" />
                       </div>
-                      <p class="mt-4">
-                          <a class="text-sm text-blue-600 hover:underline" href="./forgot-password.html">
+                      <p className="mt-4">
+                          <a className="text-sm text-blue-600 hover:underline" href="./forgot-password.html">
                               Forgot your password?
                           </a>
                       </p>
 
 
                       <button
-                          class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+                          className="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
                           href="#">
                           Log in
                       </button>
 
 
-                      <hr class="my-8" />
-                      <div class="flex items-center justify-center gap-4">
+                      <hr className="my-8" />
+                      <div className="flex items-center justify-center gap-4">
                           <button
-                              class="flex items-center justify-center w-full px-4 py-2 text-sm text-white text-gray-700 border border-gray-300 rounded-lg hover:border-gray-500 focus:border-gray-500">
-                              <svg class="w-4 h-4 mr-2" aria-hidden="true" viewBox="0 0 24 24"
-                                  fill="currentColor">
-                                  <path
-                                      d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-                              </svg>
-                              Github
+                              className="flex items-center justify-center w-full px-4 py-2 text-s text-gray-700 border border-gray-300 rounded-lg hover:border-gray-500 focus:border-gray-500">
+                              <picture>
+                                <img
+                                  src="https://i.pinimg.com/564x/88/e1/4c/88e14cc7e7fcbb0e0e09de26cec86c61.jpg"
+                                  alt="google"
+                                  width={20}
+                                  height={20}
+                                />
+                              </picture>
+                              Gmail
                           </button>
                       </div>
                   </div>
