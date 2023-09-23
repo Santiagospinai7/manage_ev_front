@@ -18,7 +18,7 @@ const ChargingPointForm = () => {
     e.preventDefault();
     console.log('Datos del formulario:', formData);
   
-    const apiKey = '44677172c537e9cc0d66756dbee48d17';
+    const apiKey = '';
   
     const apiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(formData.location)}&limit=1&appid=${apiKey}`;
   
