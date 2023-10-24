@@ -26,28 +26,6 @@ const ChargingPointForm = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   const newChargingPoint = {
-  //     name_point: formData.name,
-  //     company: formData.company,
-  //     address: formData.address,
-  //     activate: formData.status,
-  //     private: formData.private,
-  //   }
-
-  //   const latLong = await getLatLongFromAddress(formData.address);
-  //   if (latLong) {
-  //     newChargingPoint.latitude = latLong.latitude;
-  //     newChargingPoint.longitude = latLong.longitude;
-  //   }
-
-  //   console.log(newChargingPoint)
-
-  //   await createChargingPoint(newChargingPoint).unwrap()
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
   
