@@ -3,33 +3,6 @@
 import React from 'react';
 import { useGetChargePointsQuery } from '@/redux/features/chargePointsSlice';
 
-const chargePointsData = [
-    {
-        "id": 1,
-        "name": "Punto de Carga A",
-        "company": "ElectroCharge Inc.",
-        "latitude": "40.7128",
-        "longitude": "-74.0060",
-        "status": "habilitada"
-      },
-      {
-        "id": 2,
-        "name": "Punto de Carga B",
-        "company": "EcoPower Solutions",
-        "latitude": "34.0522",
-        "longitude": "-118.2437",
-        "status": "desconectada"
-      },
-      {
-        "id": 3,
-        "name": "Punto de Carga C",
-        "company": "GreenEnergy Corp.",
-        "latitude": "51.5074",
-        "longitude": "-0.1278",
-        "status": "habilitada"
-      }
-]
-
 const ChargePointsGrid = () => {
   const { data: chargePoints, error, isError, isLoading, isSuccess } = useGetChargePointsQuery('listChargePoints', {
     refetchOnMountOrArgChange: true,
@@ -44,12 +17,10 @@ const ChargePointsGrid = () => {
   }
 
   if (isError) {
-    console.log('error', error)
     content = <div>Error: {error.message}</div>
   }
 
   if (isSuccess) {
-    console.log('charge points', chargePoints)
     content = (
       <div className="container mx-auto mt-20">
         <div className="text-center mb-4">
