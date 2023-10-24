@@ -8,7 +8,7 @@ const Map = () => {
       <div className="flex-1 relative h-full"> {/* Added h-full */}
         <MapContainer />
         <div className="absolute top-0 left-0 p-4">
-          <DirectionsForm />
+        <DirectionsForm />
         </div>
       </div>
     </div>
