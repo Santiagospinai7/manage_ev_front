@@ -1,9 +1,31 @@
 'use client'
 
-const DirectionsForm = () => {
+import React, { useState } from 'react';
+
+const DirectionsForm = ({ onSubmit }) => {
+  const [formData, setFormData] = useState({
+    departure: '',
+    destination: '',
+    batteryLevel: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission (e.g., fetch directions or perform other actions)
+    const formData = {
+      departure: e.target.departure.value,
+      destination: e.target.destination.value,
+      batteryLevel: e.target.battery.value
+    };
+
+    onSubmit(formData);
   };
 
   return (
@@ -18,8 +40,8 @@ const DirectionsForm = () => {
           <input type="text" id="destination" name="destination" required className="border border-gray-300 rounded w-full py-2 px-3" />
         </div>
         <div className="mb-4">
-          <label htmlFor="departure" className="block text-gray-700 font-bold mb-2">Bateria:</label>
-          <input type="text" id="departure" name="departure" required className="border border-gray-300 rounded w-full py-2 px-3" />
+          <label htmlFor="battery" className="block text-gray-700 font-bold mb-2">Bateria:</label>
+          <input type="text" id="battery" name="battery" required className="border border-gray-300 rounded w-full py-2 px-3" />
         </div>
         <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Buscar ruta
