@@ -1,8 +1,12 @@
 'use client'
 import React, { useState } from 'react';
 import { GoogleMap, LoadScript, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
+import { useGetChargePointsQuery } from '@/redux/features/chargePointsSlice';
 
 const MapContainer = ({ userLocation, directions }) => {
+  const { data: chargePoints, error, isError, isLoading, isSuccess } = useGetChargePointsQuery()
+  let chargePointsList = []
+
   const mapStyles = {
     height: "100vh",
     width: "100%"
@@ -16,6 +20,22 @@ const MapContainer = ({ userLocation, directions }) => {
     streetViewControl: false,
     rotateControl: false,
     fullscreenControl: false
+  }
+
+  if (isSuccess) {
+    console.log(chargePoints)
+    let location
+
+    for (let i = 0; i < chargePoints.length; i++) {
+      location = {
+        lat: parseFloat(chargePoints[i].latitude),
+        lng: parseFloat(chargePoints[i].longitude)
+      }
+
+      chargePointsList.push(location)
+    }
+
+    console.log(chargePointsList)
   }
 
   return (
