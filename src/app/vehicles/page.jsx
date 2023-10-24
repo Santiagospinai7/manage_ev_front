@@ -5,26 +5,6 @@ import { useGetVehiclesQuery } from '@/redux/features/vehiclesSlice';
 
 // Imagen de carro por defecto (puedes cambiar la URL)
 const DEFAULT_VEHICLE_IMAGE = 'https://static.vecteezy.com/system/resources/thumbnails/013/923/543/small_2x/blue-car-logo-png.png'
-const VEHICLES = [
-  {
-    brand: 'Ferrari',
-    model: 'Enzo',
-    year: '2020',
-    image: DEFAULT_VEHICLE_IMAGE,
-  },
-  {
-    brand: 'Lamborghini',
-    model: 'Urus',
-    year: '2022',
-    image: DEFAULT_VEHICLE_IMAGE,
-  },
-  {
-    brand: 'Tesla',
-    model: 'X',
-    year: '2023',
-    image: DEFAULT_VEHICLE_IMAGE,
-  },
-]
 
 const ListVehicles = () => {
   const { data: electricVehicles, error, isError, isLoading, isSuccess } = useGetVehiclesQuery('listVehicles', {
@@ -40,12 +20,10 @@ const ListVehicles = () => {
   }
 
   if (isError) {
-    console.log('error', error)
     content = <div>Error: {error.message}</div>
   }
 
   if (isSuccess) {
-    console.log('electric vehicles', electricVehicles)
     content = (
       <div className="container mx-auto mt-20">
         <div className="text-center mb-4">
