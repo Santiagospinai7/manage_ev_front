@@ -19,13 +19,13 @@ const DirectionsForm = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = {
+    const routeData = {
       departure: e.target.departure.value,
       destination: e.target.destination.value,
       batteryLevel: e.target.battery.value
     };
 
-    onSubmit(formData);
+    onSubmit(routeData);
   };
 
   return (
