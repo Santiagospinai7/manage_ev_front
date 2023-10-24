@@ -37,7 +37,7 @@ const ChargePointsGrid = () => {
           <div className="flex justify-between items-center bg-blue-500 mx-10 p-2 rounded-full">
             <div>
             </div>
-            <a href="/chargePoint/new" className="text-white pr-4">+ Nueva estación</a>
+            <a href="/chargePoints/new" className="text-white pr-4">+ Nueva estación</a>
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-10">
