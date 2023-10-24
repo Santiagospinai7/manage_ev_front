@@ -1,8 +1,7 @@
 'use client'
-
-import React from 'react';
-import { useState } from "react";
-import { GoogleMap, Marker, LoadScript, InfoWindow} from '@react-google-maps/api';
+import React, { useState } from 'react';
+import { GoogleMap, Marker, LoadScript, InfoWindow, DirectionsService, DirectionsRenderer} from '@react-google-maps/api';
+import { useGetChargePointsQuery } from '@/redux/features/chargePointsSlice';
 
 const MapContainer = () => {
 
@@ -28,28 +27,18 @@ const MapContainer = () => {
     fullscreenControl: false
   }
 
-  const chargePointsData = [
-    {
-        "id": 1,
-        "name": "Punto de Carga A",
-        "company": "ElectroCharge Inc.",
-        "lat" : 6.2584,
-        "lng": -75.5659,
-        "status": "habilitada"
-      },
-      {
-        "id": 2,
-        "name": "Punto de Carga B",
-        "company": "EcoPower Solutions",
-        "lat": 6.262096,
-        "lng": -75.564459,
-        "status": "desconectada"
-      }
-  ]
+ 
+
+  const { data: chargePoints, error, isError, isLoading, isSuccess } = useGetChargePointsQuery('listChargePoints', {
+    refetchOnMountOrArgChange: true,
+    refetchOnFocus: false,
+    pollingInterval: 300000
+  })
+
   const onMapLoad = (map) => {
     setMapRef(map);
     const bounds = new google.maps.LatLngBounds();
-    chargePointsData?.forEach(({ lat, lng }) => bounds.extend({ lat, lng }));
+    chargePoints?.forEach(({ lat, lng }) => bounds.extend({ lat, lng }));
     map.fitBounds(bounds);
   };
 
@@ -64,11 +53,12 @@ const MapContainer = () => {
       <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
         <GoogleMap
           mapContainerStyle={mapStyles}
-          center={coordinates}
           zoom={15}
+          center={coordinates} // Center on user's location
           options={mapOptions}
         >
-          {chargePointsData.map(({ name, lat, lng }, index) => (
+         
+          {chargePoints.map(({ name, lat, lng }, index) => (
             <Marker
               key={index}
               position={{ lat, lng }}

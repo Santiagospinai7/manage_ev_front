@@ -32,7 +32,7 @@ const Sidebar = () => {
             <Link href="/vehicles">Mis autos</Link>
           </li>
           <li className="mt-5">
-            <Link href="/chargePoint">Estaciones</Link>
+            <Link href="/chargePoints">Estaciones</Link>
           </li>
           <li className="mt-5">
             <Link href="/statistics">Estadisticas</Link>
