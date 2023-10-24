@@ -13,8 +13,8 @@ const getBaseUrl = (nodeEnv) => {
 }
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: `${getBaseUrl(process.env.NODE_ENV)}`,
-  credentials: 'include'
+  baseUrl: `${getBaseUrl(process.env.NODE_ENV)}`
+  // credentials: 'include'
   // prepareHeaders: (headers, { getState }) => {
   //   const token = getState().auth.token
 
@@ -27,6 +27,8 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions)
+
+  console.log('result', result)
 
   // If you want, handle other status codes, too
   // if (result?.error?.status === 403) {
@@ -53,6 +55,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 export const apiSlice = createApi({
   // Change this in development to point to the correct port
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['Property', 'User', 'Vehicle', 'Investment'],
+  tagTypes: ['Vehicle'],
   endpoints: (builder) => ({})
 })

@@ -4,11 +4,8 @@ export const vehiclesSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getVehicles: builder.query({
       query: () => ({
-        url: '/api_ElectricVehicle/routes'
+        url: '/api_ElectricVehicle/routes/',
       }),
-      validateStatus: (response, result) => {
-        return response.status === 200 && !result.isError
-      },
       // keepUnusedDataFor: 5,
       providesTags: (result, error, arg) => {
         if (Array.isArray(result)) {
@@ -48,6 +45,7 @@ export const vehiclesSlice = apiSlice.injectEndpoints({
 })
 
 export const {
+  useGetVehiclesQuery,
   useGetVehicleQuery,
   useCreateVehicleMutation,
   useUpdateVehicleMutation,
