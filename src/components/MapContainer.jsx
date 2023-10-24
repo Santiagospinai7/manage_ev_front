@@ -1,17 +1,11 @@
 'use client'
+import React, { useState } from 'react';
+import { GoogleMap, LoadScript, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 
-import React from 'react';
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
-
-const MapContainer = () => {
+const MapContainer = ({ userLocation, directions }) => {
   const mapStyles = {
     height: "100vh",
     width: "100%"
-  }
-
-  const coordinates = {
-    lat: 6.25184,
-    lng: -75.56359
   }
 
   const mapOptions = {
@@ -29,13 +23,15 @@ const MapContainer = () => {
       <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
         <GoogleMap
           mapContainerStyle={mapStyles}
-          center={coordinates}
           zoom={15}
+          center={userLocation} // Center on user's location
           options={mapOptions}
-        />
+        >
+          {directions && <DirectionsRenderer directions={directions} />}
+          </GoogleMap>
       </LoadScript>
     </div>
   )
 }
 
-export default MapContainer
+export default MapContainer;
