@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 const VehicleRegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -42,10 +43,10 @@ const VehicleRegistrationForm = () => {
     }
   };
 
-  return (
+  const content = (
     <div className="p-4 min-h-screen flex items-center justify-center bg-gray-100">
       <div className="max-w-md mx-auto p-4 border rounded-lg shadow-lg flex">
-        <div className="w-2/3 pr-4">
+        <div className="w-full md:w-1/2 pr-4">
           <h2 className="text-2xl font-semibold mb-4">Registro de Vehículo</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
@@ -94,19 +95,25 @@ const VehicleRegistrationForm = () => {
               Registrar Vehículo
             </button>
 
-          </form>
-          {message && <p className="text-red-500 mt-2">{message}</p>}
-        </div>
-        <div className="h-32 md:h-auto md:w-1/2">
-          <img
-            className="object-cover w-full h-full"
-            src="https://storage.googleapis.com/site.esss.co/77ec3784-thumb-blog-eletrificacao-tendencias-de-veiculos-eletricos-no-brasil-1.png"
-            alt="img"
-          />
-        </div>
+            </form>
+        {message && <p className="text-red-500 mt-2">{message}</p>}
+      </div>
+      <div className="hidden md:block w-1/2">
+        <img
+          src="https://storage.googleapis.com/site.esss.co/77ec3784-thumb-blog-eletrificacao-tendencias-de-veiculos-eletricos-no-brasil-1.png"
+          alt="vehicle img"
+          className="object-cover w-full h-full"
+        />
       </div>
     </div>
-  );
-};
+  </div>
+  )
+
+  return (
+    <>
+      {content}
+    </>
+  )
+}
 
 export default VehicleRegistrationForm;
