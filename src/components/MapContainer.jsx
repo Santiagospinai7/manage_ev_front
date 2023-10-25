@@ -23,7 +23,6 @@ const MapContainer = ({ userLocation, directions }) => {
   }
 
   if (isSuccess) {
-    console.log(chargePoints)
     let location
 
     for (let i = 0; i < chargePoints.length; i++) {
