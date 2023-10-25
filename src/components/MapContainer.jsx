@@ -4,14 +4,16 @@ import { GoogleMap, Marker, LoadScript, InfoWindow, DirectionsService, Direction
 import { useGetChargePointsQuery } from '@/redux/features/chargePointsSlice';
 
 const MapContainer = () => {
-
-  const [isOpen, setIsOpen] = useState(false);
+  const { data: chargePoints, error, isError, isLoading, isSuccess } = useGetChargePointsQuery()
   const [mapRef, setMapRef] = useState();
+  const [isOpen, setIsOpen] = useState(false);
+  const [infoWindowData, setInfoWindowData] = useState();
+  let chargePointsList = [];
+
   const mapStyles = {
     height: "100vh",
     width: "100%"
   }
-  const [infoWindowData, setInfoWindowData] = useState();
   
   const coordinates = {
     lat: 6.2584,
@@ -26,21 +28,22 @@ const MapContainer = () => {
     rotateControl: false,
     fullscreenControl: false
   }
+  
+  if (isSuccess) {
+    let location;
+    for (let i = 0; i < chargePoints.length; i++) {
+      location = {
+        lat: parseFloat(chargePoints[i].latitude),
+        lng: parseFloat(chargePoints[i].longitude),
+        name: chargePoints[i].name_point
+      }
+      chargePointsList.push(location)
+    }
 
- 
+    console.log("holii",chargePointsList)
+  }
 
-  const { data: chargePoints, error, isError, isLoading, isSuccess } = useGetChargePointsQuery('listChargePoints', {
-    refetchOnMountOrArgChange: true,
-    refetchOnFocus: false,
-    pollingInterval: 300000
-  })
 
-  const onMapLoad = (map) => {
-    setMapRef(map);
-    const bounds = new google.maps.LatLngBounds();
-    chargePoints?.forEach(({ lat, lng }) => bounds.extend({ lat, lng }));
-    map.fitBounds(bounds);
-  };
 
   const handleMarkerClick = (id, lat, lng, name) => {
     mapRef?.panTo({ lat, lng });
@@ -57,25 +60,8 @@ const MapContainer = () => {
           center={coordinates} // Center on user's location
           options={mapOptions}
         >
-         
-          {chargePoints.map(({ name, lat, lng }, index) => (
-            <Marker
-              key={index}
-              position={{ lat, lng }}
-              onClick={() => {
-                handleMarkerClick(ind, lat, lng, name);
-              }}
-            >
-              {isOpen && infoWindowData?.id === ind && (
-                <InfoWindow
-                  onCloseClick={() => {
-                    setIsOpen(false);
-                  }}
-                >
-                  <h3>{infoWindowData.name}</h3>
-                </InfoWindow>
-              )}
-            </Marker>
+         {chargePointsList.map(({ lat, lng }) => (
+            <Marker position={{ lat, lng }} />
           ))}
         </GoogleMap>
       </LoadScript>
