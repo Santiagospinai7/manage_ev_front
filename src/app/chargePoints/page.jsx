@@ -4,7 +4,6 @@ import React from 'react';
 import { useGetChargePointsQuery } from '@/redux/features/chargePointsSlice';
 
 const ChargePointsGrid = () => {
-  
   const { data: chargePoints, error, isError, isLoading, isSuccess } = useGetChargePointsQuery('listChargePoints', {
     refetchOnMountOrArgChange: true,
     refetchOnFocus: false,
