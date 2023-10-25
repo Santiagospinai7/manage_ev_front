@@ -8,7 +8,8 @@ const MapContainer = () => {
   const [mapRef, setMapRef] = useState();
   const [isOpen, setIsOpen] = useState(false);
   const [infoWindowData, setInfoWindowData] = useState();
-  let chargePointsList = [];
+  let chargePointsEnableList = [];
+  let chargePointsDisableList = [];
 
   const mapStyles = {
     height: "100vh",
@@ -29,6 +30,12 @@ const MapContainer = () => {
     fullscreenControl: false
   }
   
+  const handleMarkerClick = (id, lat, lng, name) => {
+    mapRef?.panTo({ lat, lng });
+    setInfoWindowData({ id, name });
+    setIsOpen(true);
+  };
+
   if (isSuccess) {
     let location;
     for (let i = 0; i < chargePoints.length; i++) {
@@ -37,20 +44,15 @@ const MapContainer = () => {
         lng: parseFloat(chargePoints[i].longitude),
         name: chargePoints[i].name_point
       }
-      chargePointsList.push(location)
+      if (chargePoints[i].activate){
+        chargePointsEnableList.push(location)
+      }else{
+        chargePointsDisableList.push(location)
+      }
+      
     }
-
-    console.log("holii",chargePointsList)
+    
   }
-
-
-
-  const handleMarkerClick = (id, lat, lng, name) => {
-    mapRef?.panTo({ lat, lng });
-    setInfoWindowData({ id, name });
-    setIsOpen(true);
-  };
-
   return (
     <div>
       <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
@@ -60,8 +62,21 @@ const MapContainer = () => {
           center={coordinates} // Center on user's location
           options={mapOptions}
         >
-         {chargePointsList.map(({ lat, lng }) => (
-            <Marker position={{ lat, lng }} />
+         {chargePointsEnableList.map(({ lat, lng, name },ind) => (
+            <Marker 
+              key={ind}
+              position={{ lat, lng }} 
+              icon={"http://maps.google.com/mapfiles/ms/icons/blue-pushpin.png"}
+              
+            />
+          ))}
+          {chargePointsDisableList.map(({ lat, lng, name },ind) => (
+            <Marker 
+              key={ind}
+              position={{ lat, lng }} 
+              icon={"http://maps.google.com/mapfiles/ms/icons/red-pushpin.png"}
+              
+            />
           ))}
         </GoogleMap>
       </LoadScript>
