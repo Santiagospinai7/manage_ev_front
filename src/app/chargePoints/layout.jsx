@@ -1,5 +1,6 @@
 import Sidebar from '@/components/Sidebar'
 import Navbar from '@/components/Navbar'
+import Downbar from '@/components/Downbar'
 import {ReduxProvider} from '@/redux/provider'
 
 export default function chargePointLayout({ children }) {
@@ -10,6 +11,7 @@ export default function chargePointLayout({ children }) {
         <Navbar />
         <div className="mt-16 h-full"><ReduxProvider>{children}</ReduxProvider></div>
       </div>
+      <Downbar />
     </div>
   );
 }
