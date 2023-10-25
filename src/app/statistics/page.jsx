@@ -1,9 +1,72 @@
 'use client'
 
-import React from 'react';
-import Bar from '@/components/charts/Bar';
+import React, { useEffect } from 'react';
+import Chart from 'chart.js/auto'; // Importa Chart.js
 
 const Statistics = () => {
+  useEffect(() => {
+    // Datos simulados para el gráfico de línea
+    const data = {
+      labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+      datasets: [
+        {
+          label: 'Consumo de batería por mes (kWh)',
+          data: [50, 60, 55, 70, 48, 40],
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          tension: 0.1
+          // borderWidth: 1,
+        },
+      ],
+    };
+
+    // Configuración del gráfico de linea
+    const options = {
+      scales: {
+        y: {
+          beginAtZero: false,
+          suggestedMax: 80,
+          suggestedMin: 20
+        },
+      },
+    };
+
+    // Obtén el contexto del canvas para grafico de lineas
+    const ctx = document.getElementById('batteryChart').getContext('2d');
+
+    // Crea el gráfico de línea
+    new Chart(ctx, {
+      type: 'line',
+      data: data,
+      options: options,
+    });
+
+    // Datos simulados para la gráfica de rosquilla (carga de batería)
+    const dataCircular = {
+      labels: ['Carga de Batería', 'Carga Restante'],
+      datasets: [
+        {
+          data: [75, 25], // Porcentaje de carga y carga restante
+          backgroundColor: ['rgba(75, 192, 192, 0.7)', 'rgba(0, 0, 0, 0.2)'],
+        },
+      ],
+    };
+
+    // Configuración de la gráfica circular (doughnut)
+    const optionsCircular = {
+      cutout: '50%', // Tamaño del agujero en el centro
+    };
+
+    // Obtén el contexto del canvas
+    const ctxCircular = document.getElementById('circularChart').getContext('2d');
+
+    // Crea la gráfica circular (doughnut)
+    new Chart(ctxCircular, {
+      type: 'doughnut',
+      data: dataCircular,
+      options: optionsCircular,
+    });
+  }, []);
 
   return (
     <div className="container mx-auto mt-20 text-center">
@@ -14,9 +77,9 @@ const Statistics = () => {
         <path d="M15 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path>
         <path d="M4 20l14 0"></path>
       </svg>
-      
+
       <h2 className="text-2xl font-medium mb-4">Estadisticas</h2>
-      
+
       <div className="flex justify-center items-center bg-blue-500 mx-10 p-4 rounded">
         <form className="flex items-center space-x-4">
           <div className="flex items-center">
@@ -40,13 +103,16 @@ const Statistics = () => {
       </div>
 
       <div className="flex justify-between mt-10 mx-10 items-center">
-        <div>
-          <picture>
-            <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*LKw6wH5X0Cp6GvZbS085AQ.png" alt="chart" />
-          </picture>
+        <div className="flex">
+          <div>
+            <canvas id="batteryChart" width="800" height="400"></canvas>
+          </div>
+          <div>
+            <canvas id="circularChart" width="400" height="400"></canvas>
+          </div>
         </div>
       </div>
-      
+
     </div>
   );
 };
