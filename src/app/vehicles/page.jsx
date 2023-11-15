@@ -47,7 +47,7 @@ const ListVehicles = () => {
               <div className="flex items-center mb-4">
                 <img src={vehicle.image || DEFAULT_VEHICLE_IMAGE} alt={`Imagen de ${vehicle.brand} ${vehicle.model}`} className="w-16 h-16 rounded-full" />
                 <div className="ml-4">
-                  <h3 className="text-lg font-semibold">{vehicle.brand}</h3>
+                  <h3 className="text-lg font-semibold">{vehicle.make}</h3>
                   <p className="text-gray-500">{vehicle.model}</p>
                   <p className="text-gray-500">{vehicle.year}</p>
                 </div>

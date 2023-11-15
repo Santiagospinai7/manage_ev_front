@@ -46,7 +46,7 @@ const ChargePointsGrid = () => {
               <div className="flex items-center mb-4">
                 <div className="ml-4">
                   <h3 className="text-lg font-semibold">{point.name_point}</h3>
-                  <p className="text-gray-500">{point.latitude}, {point.longitude}</p>
+                  {/* <p className="text-gray-500">{point.latitude}, {point.longitude}</p> */}
                   <p className="text-gray-500">{point.company}</p>
                   <p className="text-gray-500">Disponible: {(point.activate === true) ? 'Si' : 'No'}</p>
                 </div>
