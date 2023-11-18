@@ -33,6 +33,7 @@ const Map = () => {
 
   const handleGeolocation = () => {
     navigator.geolocation.getCurrentPosition(
+    
       (position) => {
         setUserLocation({
           lat: position.coords.latitude,
