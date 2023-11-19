@@ -49,7 +49,7 @@ const ListVehicles = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-10 mb-4">
           {electricVehicles.map((vehicle, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition duration-300 border border-blue-500">
+            <div key={index} className={`bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition duration-300 border border-blue-500 ${selectedVehicle === vehicle ? 'h-96' : 'h-64'}`}>
               <div className="flex items-center mb-4">
                 <img src={vehicle.image || DEFAULT_VEHICLE_IMAGE} alt={`Imagen de ${vehicle.brand} ${vehicle.model}`} className="w-16 h-16 rounded-full" />
                 <div className="ml-4">
@@ -57,39 +57,34 @@ const ListVehicles = () => {
                   <p className="text-gray-500">{vehicle.model}</p>
                 </div>
               </div>
-              <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
-                onClick={() => handleDetailsClick(vehicle)}
-              >
-                Ver detalles
-              </button>
-
-              <button
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4"
-                onClick={() => handleDeleteVehicle(vehicle)}
+              <div className="flex space-x-4">
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold text-xs py-1 px-2 rounded"
+                  onClick={() => handleDetailsClick(vehicle)}
                 >
-                Delete
-              </button>
+                  Ver detalles
+                </button>
+                <button
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold text-xs py-1 px-2 rounded"
+                  onClick={() => handleDeleteVehicle(vehicle)}
+                >
+                  Borrar
+                </button>
+              </div>
 
               {selectedVehicle === vehicle && (
-                <div className="absolute top-0 left-0 w-full h-full bg-gray-800 bg-opacity-75 flex items-center justify-center">
-                  <div className="bg-white p-8 rounded-lg">
-                    <h2 className="text-2xl font-semibold mb-4">{vehicle.brand} {vehicle.model}</h2>
-                    <p>ID: {vehicle.vehicle_id}</p>
-                    <p>Año: {vehicle.year}</p>
-                    <p>Battery : {vehicle.battery_capacity_kwh}</p>
-                    <p>Rango: {vehicle.range_kilometers}</p>
+                <div className={`mt-4`}>
+                  <h2 className="text-2xl font-semibold mb-2">{vehicle.brand} {vehicle.model}</h2>
+                  <p>Año: {vehicle.year}</p>
+                  <p>Batería: {vehicle.battery_capacity_kwh}</p>
+                  <p>Rango: {vehicle.range_kilometers}</p>
 
-                    
-                      {/* Agrega más detalles según tus necesidades */}
-                      <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
-                        onClick={() => handleDetailsClick(null)}
-                      >
-                        Cerrar detalles
-                      </button>
-
-                  </div>
+                  <button
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold text-xs py-1 px-2 rounded mt-4"
+                    onClick={() => setSelectedVehicle(null)}
+                  >
+                    Cerrar detalles
+                  </button>
                 </div>
               )}
             </div>

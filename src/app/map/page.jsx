@@ -9,7 +9,6 @@ const Map = () => {
   const [userLocation, setUserLocation] = useState(null);
 
   const handleFormSubmit = (routeData) => {
-    // Check if both departure and destination are provided
     if (routeData.departure && routeData.destination) {
       const directionsService = new window.google.maps.DirectionsService();
       directionsService.route(
