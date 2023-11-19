@@ -53,7 +53,7 @@ const ChargePointsGrid = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-10">
           {chargePoints.map((point, index) => (
-            <div key={index} className={`bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition duration-300 border border-blue-500 ${selectedChargePoint === point ? 'h-96' : 'h-74'}`}>
+            <div key={index} className={`bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition duration-300 border border-blue-500 ${selectedChargePoint === point ? 'h-96' : 'h-65'}`}>
               <div className="flex items-center mb-4">
                 <div className="ml-4">
                   <h3 className="text-lg font-semibold">{point.name_point}</h3>
