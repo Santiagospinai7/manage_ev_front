@@ -1,9 +1,7 @@
+"use client";
 import React, { useState } from 'react';
 import { GoogleMap, Marker, LoadScript, InfoWindow, DirectionsRenderer } from '@react-google-maps/api';
 import { useGetChargePointsQuery } from '@/redux/features/chargePointsSlice';
-
-// Importa tus íconos personalizados aquí
-
 
 const MapContainer = ({ userLocation, directions }) => {
 
@@ -76,7 +74,6 @@ const MapContainer = ({ userLocation, directions }) => {
                 <h2>{infoWindow.name}</h2>
                 <p>Disponible: {infoWindow.activate ? 'Sí' : 'No'}</p>
                 <p>Compañia: {infoWindow.company} </p>
-                {/* Add other information you want to display */}
               </div>
             </InfoWindow>
           )}
