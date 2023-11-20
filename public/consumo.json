@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "monthlyData": {
+      "Enero": 30,  
+      "Febrero": 40,
+      "Marzo": 50,
+      "Abril": 60,
+      "Mayo": 68,
+      "Junio": 40,
+      "Julio": 50,
+      "Agosto": 40,
+      "Septiembre": 30,
+      "Octubre": 28,
+      "Noviembre": 70,
+      "Diciembre": 50
+    },
+    "additionalData": {
+      "Desgaste": 85,
+      "CargaRestante": 15
+    }
+  },
+  {
+    "id": 2,
+    "monthlyData": {
+      "Enero": 55,
+      "Febrero": 70,
+      "Marzo": 65,
+      "Abril": 80,
+      "Mayo": 53,
+      "Junio": 20,
+      "Julio": 15,
+      "Agosto": 70,
+      "Septiembre": 25,
+      "Octubre": 23,
+      "Noviembre": 80,
+      "Diciembre": 40
+    },
+    "additionalData": {
+      "Desgaste": 50,
+      "CargaRestante": 50
+    }
+  },
+  {
+    "id": 3,
+    "monthlyData": {
+      "Enero": 60,
+      "Febrero": 75,
+      "Marzo": 70,
+      "Abril": 85,
+      "Mayo": 58,
+      "Junio": 15,
+      "Julio": 10,
+      "Agosto": 75,
+      "Septiembre": 35,
+      "Octubre": 33,
+      "Noviembre": 85,
+      "Diciembre": 50
+    },
+    "additionalData": {
+      "Desgaste": 80,
+      "CargaRestante": 20
+    }
+  }
+]
+
+
+
