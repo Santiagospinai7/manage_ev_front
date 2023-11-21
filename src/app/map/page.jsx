@@ -1,14 +1,14 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, use } from 'react';
 import MapContainer from "@/components/MapContainer"
 import DirectionsForm from "@/components/DirectionsForm"
-import RecommendedRoutes from "@/components/RecommendedRoutes"
 
 const Map = () => {
   const [directions, setDirections] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [recommendedRoutes, setRecommendedRoutes] = useState([]);
+  const [selectedRoute, setSelectedRoute] = useState(null);
 
   const handleFormSubmit = async (routeData) => {
     console.log('routeData', routeData)
@@ -21,27 +21,6 @@ const Map = () => {
     } catch (error) {
       console.error(error)
     }
-
-
-    // if (routeData.departure && routeData.destination) {
-    //   const directionsService = new window.google.maps.DirectionsService();
-    //   directionsService.route(
-    //     {
-    //       origin: routeData.departure,
-    //       destination: routeData.destination,
-    //       travelMode: 'DRIVING',
-    //     },
-    //     (response, status) => {
-    //       if (status === 'OK') {
-    //         setDirections(response);
-    //       } else {
-    //         console.error('Error getting directions:', status);
-    //       }
-    //     }
-    //   );
-    // } else {
-    //   console.error('Please provide both departure and destination');
-    // }
   };
 
   const handleGeolocation = () => {
@@ -72,12 +51,44 @@ const Map = () => {
     };
   }, []);
 
+  // render route in the map each time that the selected route changes
+  useEffect(() => {
+    if (selectedRoute) {
+      const polyline = selectedRoute.informacion_ruta.overview_polyline
+
+      console.log('polyline', polyline)
+      const arrayPath = google.maps.geometry.encoding.decodePath(polyline)
+      console.log('arrayPath', arrayPath)
+
+      const directionsService = new window.google.maps.DirectionsService();
+      directionsService.route(
+        {
+          origin: arrayPath[0],
+          destination: arrayPath[arrayPath.length - 1],
+          travelMode: 'DRIVING',
+        },
+        (response, status) => {
+          if (status === 'OK') {
+            setDirections(response);
+          } else {
+            console.error('Error getting directions:', status);
+          }
+        }
+      );
+    }
+  }, [selectedRoute]);
+
   return (
     <div className="flex h-full overscroll-none">
       <div className="flex-1 relative h-full">
         <MapContainer userLocation={userLocation} directions={directions} />
         <div className="absolute top-0 left-0 p-4">
-          <DirectionsForm onSubmit={handleFormSubmit} recommendedRoutes={recommendedRoutes} setRecommendedRoutes={setRecommendedRoutes} />
+          <DirectionsForm 
+            onSubmit={handleFormSubmit} 
+            recommendedRoutes={recommendedRoutes} 
+            setRecommendedRoutes={setRecommendedRoutes} 
+            setSelectedRoute={setSelectedRoute}
+          />
         </div>
       </div>
     </div>

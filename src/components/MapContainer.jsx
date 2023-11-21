@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { GoogleMap, Marker, LoadScript, InfoWindow, DirectionsRenderer, useLoadScript } from '@react-google-maps/api';
 import { useGetChargePointsQuery } from '@/redux/features/chargePointsSlice';
 
-const MapContainer = ({ userLocation, directions }) => {
+const MapContainer = ({ userLocation, directions, selectedRoute  }) => {
   const enableChargePoint = "https://img.icons8.com/emoji/48/high-voltage.png";
   const disableChargePoint = "https://img.icons8.com/color/48/000000/lightning-bolt.png";
 
