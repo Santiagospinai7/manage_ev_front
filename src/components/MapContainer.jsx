@@ -29,12 +29,6 @@ const MapContainer = () => {
     rotateControl: false,
     fullscreenControl: false
   }
-  
-  const handleMarkerClick = (id, lat, lng, name) => {
-    mapRef?.panTo({ lat, lng });
-    setInfoWindowData({ id, name });
-    setIsOpen(true);
-  };
 
   if (isSuccess) {
     let location;
@@ -67,9 +61,9 @@ const MapContainer = () => {
               key={ind}
               position={{ lat, lng }} 
               icon={"http://maps.google.com/mapfiles/ms/icons/blue-pushpin.png"}
-              
             />
           ))}
+          
           {chargePointsDisableList.map(({ lat, lng, name },ind) => (
             <Marker 
               key={ind}
