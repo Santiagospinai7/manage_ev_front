@@ -4,7 +4,9 @@ import { Autocomplete, useLoadScript } from '@react-google-maps/api';
 import React, { useState, useRef, useEffect } from 'react';
 import { useGetVehiclesQuery } from '@/redux/features/vehiclesSlice';
 
-const DirectionsForm = ({ onSubmit }) => {
+import RecommendedRoutes from '@/components/RecommendedRoutes';
+
+const DirectionsForm = ({ onSubmit, recommendedRoutes }) => {
   const [formData, setFormData] = useState({
     departure: '',
     destination: '',
@@ -131,7 +133,7 @@ const DirectionsForm = ({ onSubmit }) => {
         <form onSubmit={handleSubmit} className={`w-full`}>
           <div className="mb-4 flex items-center"> {/* Use flex to align items horizontally */}
             <div style={{ flex: 1 }}> {/* Allow the departure input to take available space */}
-              <label htmlFor="departure" className="block text-gray-700 font-bold mb-2">Punto origen:</label>
+              <label htmlFor="departure" className="block text-gray-700 font-bold mb-1">Punto origen:</label>
               <div className="relative w-full"> {/* Use relative positioning for the icon */}
                 <Autocomplete
                   onLoad={(autocomplete) => setAutocompleteServiceOrigin(autocomplete)}
@@ -163,7 +165,7 @@ const DirectionsForm = ({ onSubmit }) => {
             </div>
           </div>
           <div className="mb-4">
-            <label htmlFor="destination" className="block text-gray-700 font-bold mb-2">Punto destino:</label>
+            <label htmlFor="destination" className="block text-gray-700 font-bold mb-1">Punto destino:</label>
             <Autocomplete
               onLoad={(autocomplete) => setAutocompleteServiceDestination(autocomplete)}
               onPlaceChanged={() => handlePlaceChanged(autocompleteServiceDestination, 'destination')}
@@ -182,7 +184,7 @@ const DirectionsForm = ({ onSubmit }) => {
             </Autocomplete>
           </div>
           <div className="mb-4">
-            <label htmlFor="battery" className="block text-gray-700 font-bold mb-2">Batería:</label>
+            <label htmlFor="battery" className="block text-gray-700 font-bold mb-1">Batería:</label>
             <input
               type="text"
               id="battery"
@@ -198,6 +200,11 @@ const DirectionsForm = ({ onSubmit }) => {
           </button>
         </form>
       )}
+      {
+        (recommendedRoutes.length > 0) && (
+          <RecommendedRoutes routes={recommendedRoutes} />
+        )
+      }
     </div>
   );
 };
