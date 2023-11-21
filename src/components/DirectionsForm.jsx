@@ -2,6 +2,7 @@
 
 import { Autocomplete, useLoadScript } from '@react-google-maps/api';
 import React, { useState, useRef, useEffect } from 'react';
+import { useGetVehiclesQuery } from '@/redux/features/vehiclesSlice';
 
 const DirectionsForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,16 @@ const DirectionsForm = ({ onSubmit }) => {
     destination: '',
     batteryLevel: '',
   });
+
+  const { data: electricVehicles, error, isError, isLoading, isSuccess } = useGetVehiclesQuery('listVehicles', {
+    refetchOnMountOrArgChange: true,
+    refetchOnFocus: false,
+    pollingInterval: 300000
+  });
+
+  if (isSuccess) {
+    console.log('vehicles', electricVehicles)
+  }
 
   const [formVisible, setFormVisible] = useState(true); // Step 1: State variable for form visibility
 
@@ -28,11 +39,29 @@ const DirectionsForm = ({ onSubmit }) => {
   const handleSetCurrentPosition = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        async (position) => {
           const { latitude, longitude } = position.coords;
-          setFormData({
-            ...formData,
-            departure: `${latitude}, ${longitude}`,
+  
+          // Fetch the location name using the Geocoding API
+          const geocoder = new window.google.maps.Geocoder();
+          const latLng = new window.google.maps.LatLng(latitude, longitude);
+  
+          geocoder.geocode({ location: latLng }, (results, status) => {
+            if (status === 'OK') {
+              if (results[0]) {
+                const locationName = results[0].formatted_address;
+  
+                // Update the state with the location name
+                setFormData({
+                  ...formData,
+                  departure: locationName,
+                });
+              } else {
+                console.error('No results found');
+              }
+            } else {
+              console.error(`Geocoder failed due to: ${status}`);
+            }
           });
         },
         (error) => {
