@@ -29,7 +29,7 @@ const MapContainer = ({ userLocation, directions }) => {
   if (!isLoaded) return <div>Loading maps...</div>;
 
   return (
-    <div>
+    <div style={{ overflow: 'hidden' }}>
       <GoogleMap
         mapContainerStyle={{
           height: '100vh',

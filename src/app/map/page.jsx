@@ -63,12 +63,21 @@ const Map = () => {
     handleGeolocation(); // Get user's current location on component mount
   }, []);
 
+  useEffect(() => {
+    const originalOverflowStyle = window.getComputedStyle(document.body).overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = originalOverflowStyle;
+    };
+  }, []);
+
   return (
     <div className="flex h-full overscroll-none">
       <div className="flex-1 relative h-full">
         <MapContainer userLocation={userLocation} directions={directions} />
         <div className="absolute top-0 left-0 p-4">
-          <DirectionsForm onSubmit={handleFormSubmit} recommendedRoutes={recommendedRoutes} />
+          <DirectionsForm onSubmit={handleFormSubmit} recommendedRoutes={recommendedRoutes} setRecommendedRoutes={setRecommendedRoutes} />
         </div>
       </div>
     </div>

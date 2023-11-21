@@ -11,8 +11,8 @@ const RecommendedRoutes = ({ routes }) => {
   };
 
   return (
-    <div className="w-full">
-      <ul className="mt-5 list-none p-0">
+    <div className="w-full mt-5 h-48 overflow-y-auto">
+      <ul className="list-none p-0">
         {routes.map((route, index) => (
           <li
             key={route.numero_ruta}

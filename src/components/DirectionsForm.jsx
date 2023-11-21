@@ -6,7 +6,7 @@ import { useGetVehiclesQuery } from '@/redux/features/vehiclesSlice';
 
 import RecommendedRoutes from '@/components/RecommendedRoutes';
 
-const DirectionsForm = ({ onSubmit, recommendedRoutes }) => {
+const DirectionsForm = ({ onSubmit, recommendedRoutes, setRecommendedRoutes }) => {
   const [formData, setFormData] = useState({
     departure: '',
     destination: '',
@@ -36,6 +36,13 @@ const DirectionsForm = ({ onSubmit, recommendedRoutes }) => {
       ...formData,
       [name]: value,
     });
+  };
+
+  const handleBack = (e) => {
+    e.preventDefault();
+    // Clear the recommended routes and show the form
+    setRecommendedRoutes([]);
+    setFormVisible(true);
   };
 
   const handleSetCurrentPosition = () => {
@@ -87,6 +94,9 @@ const DirectionsForm = ({ onSubmit, recommendedRoutes }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('Submit clicked');
+    // setFormVisible(true);
+  
     const routeData = {
       departure: formData.departure,
       destination: formData.destination,
@@ -111,8 +121,9 @@ const DirectionsForm = ({ onSubmit, recommendedRoutes }) => {
     }
   }, [isLoaded]);
 
+  console.log('Rendering form, formVisible:', formVisible);
   return (
-    <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg p-6" style={{ transition: 'height 0.2s ease-out', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg p-6 h-128 overflow-y-auto">
       <button onClick={toggleFormVisibility} className="mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         {formVisible ? (
           // SVG for hiding
@@ -129,7 +140,7 @@ const DirectionsForm = ({ onSubmit, recommendedRoutes }) => {
           </svg>
         )}
       </button>
-      {isLoaded && formVisible && (
+      {isLoaded && formVisible && recommendedRoutes.length <= 0 && (
         <form onSubmit={handleSubmit} className={`w-full`}>
           <div className="mb-4 flex items-center"> {/* Use flex to align items horizontally */}
             <div style={{ flex: 1 }}> {/* Allow the departure input to take available space */}
@@ -200,11 +211,16 @@ const DirectionsForm = ({ onSubmit, recommendedRoutes }) => {
           </button>
         </form>
       )}
-      {
-        (recommendedRoutes.length > 0) && (
+      {isLoaded && formVisible && recommendedRoutes.length > 0 && (
+        <div>
+          <button onClick={handleBack} className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+              <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+            </svg>
+          </button>
           <RecommendedRoutes routes={recommendedRoutes} />
-        )
-      }
+        </div>
+      )}
     </div>
   );
 };
