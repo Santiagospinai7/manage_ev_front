@@ -52,25 +52,27 @@ const DirectionsForm = ({ onSubmit, recommendedRoutes, setRecommendedRoutes, set
         async (position) => {
           const { latitude, longitude } = position.coords;
   
-          // Fetch the location name using the Geocoding API
-          const geocoder = new window.google.maps.Geocoder();
-          const latLng = new window.google.maps.LatLng(latitude, longitude);
+          // Fetch place details using the Places API
+          const placesService = new window.google.maps.places.PlacesService(document.createElement('div'));
+          const request = {
+            location: new window.google.maps.LatLng(latitude, longitude),
+            radius: 50, // Set the radius to cover nearby places
+          };
   
-          geocoder.geocode({ location: latLng }, (results, status) => {
-            if (status === 'OK') {
-              if (results[0]) {
-                const locationName = results[0].formatted_address;
+          placesService.nearbySearch(request, (results, status) => {
+            if (status === window.google.maps.places.PlacesServiceStatus.OK && results.length > 0) {
+              console.log('Nearby places result:', results[0]);
   
-                // Update the state with the location name
-                setFormData({
-                  ...formData,
-                  departure: locationName,
-                });
-              } else {
-                console.error('No results found');
-              }
+              // Extract the name of the first nearby place
+              const placeName = results[0].name;
+  
+              // Update the state with the location name
+              setFormData({
+                ...formData,
+                departure: placeName,
+              });
             } else {
-              console.error(`Geocoder failed due to: ${status}`);
+              console.error('No nearby places found');
             }
           });
         },
@@ -82,6 +84,9 @@ const DirectionsForm = ({ onSubmit, recommendedRoutes, setRecommendedRoutes, set
       console.error('Geolocation is not supported by this browser');
     }
   };
+  
+  
+  
 
   const handlePlaceChanged = (autocomplete, inputRef) => {
     const place = autocomplete.getPlace();
@@ -214,7 +219,7 @@ const DirectionsForm = ({ onSubmit, recommendedRoutes, setRecommendedRoutes, set
       {isLoaded && formVisible && recommendedRoutes.length > 0 && (
         <div>
           <RecommendedRoutes routes={recommendedRoutes} setSelectedRoute={setSelectedRoute} />
-          <div className="flex justify-end mt-5">
+          <div className="flex justify-center mt-5">
             <button
               type="button"
               onClick={handleBack}
