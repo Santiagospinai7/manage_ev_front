@@ -1,7 +1,8 @@
 "use client"
 
 import React, { useState } from 'react';
-import { useGetChargePointsQuery } from '@/redux/features/chargePointsSlice';
+import { useGetChargePointsQuery, useDeleteChargePointMutation } from '@/redux/features/chargePointsSlice';
+import ChargePointCard from '@/components/ChargePointCard';
 
 const ChargePointsGrid = () => {
   const { data: chargePoints, error, isError, isLoading, isSuccess } = useGetChargePointsQuery('listChargePoints', {
@@ -11,14 +12,21 @@ const ChargePointsGrid = () => {
   });
 
   const [selectedChargePoint, setSelectedChargePoint] = useState(null);
+  const [deleteChargePoint] = useDeleteChargePointMutation();
 
   const handleDetailsClick = (chargePoint) => {
     setSelectedChargePoint(selectedChargePoint === chargePoint ? null : chargePoint);
   };
 
-  const handleDeleteChargePoint = (chargePoint) => {
-    // Lógica para eliminar un punto de carga
-    console.log(`Eliminar punto de carga: ${chargePoint.name_point}`);
+  const handleDeleteChargePoint = async (chargePoint) => {
+    console.log('Deleting chargePoint:', chargePoint.id);
+    try {
+      await deleteChargePoint(chargePoint.id).unwrap();
+
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   let content;
@@ -53,42 +61,14 @@ const ChargePointsGrid = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-10">
           {chargePoints.map((point, index) => (
-            <div key={index} className={`bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition duration-300 border border-blue-500 ${selectedChargePoint === point ? 'h-96' : 'h-65'}`}>
-              <div className="flex items-center mb-4">
-                <div className="ml-4">
-                  <h3 className="text-lg font-semibold">{point.name_point}</h3>
-                </div>
-              </div>
-              <div className="flex space-x-4">
-                <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold text-xs py-1 px-2 rounded"
-                  onClick={() => handleDetailsClick(point)}
-                >
-                  Ver detalles
-                </button>
-                <button
-                  className="bg-red-500 hover:bg-red-700 text-white font-bold text-xs py-1 px-2 rounded"
-                  onClick={() => handleDeleteChargePoint(point)}
-                >
-                  Borrar
-                </button>
-              </div>
-
-              {selectedChargePoint === point && (
-                <div className={`mt-4`}>
-                  {/* Agrega detalles adicionales según tus necesidades */}
-                  <p className="text-gray-500">{point.company}</p>
-                  <p className="text-gray-500">Disponible: {(point.activate === true) ? 'Si' : 'No'}</p>
-                  {/* Agrega más detalles según tus necesidades */}
-                  <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold text-xs py-1 px-2 rounded mt-4"
-                    onClick={() => setSelectedChargePoint(null)}
-                  >
-                    Cerrar detalles
-                  </button>
-                </div>
-              )}
-            </div>
+            <ChargePointCard
+              key={index}
+              chargePoint={point}
+              index={index}
+              isExpanded={selectedChargePoint === point}
+              handleDetailsClick={() => handleDetailsClick(point)}
+              handleDeleteChargePoint={() => handleDeleteChargePoint(point)}
+            />
           ))}
         </div>
       </div>
