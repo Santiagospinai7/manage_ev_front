@@ -17,7 +17,7 @@ const VehicleCard = ({ vehicle, index, isExpanded, handleDetailsClick }) => {
           <p className="text-gray-500">{vehicle.model}</p>
         </div>
       </div>
-      <div className="flex space-x-4">
+      <div className="flex justify-left space-x-4">
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold text-xs py-1 px-2 rounded"
           onClick={handleDetailsClick}
@@ -30,17 +30,11 @@ const VehicleCard = ({ vehicle, index, isExpanded, handleDetailsClick }) => {
         >
           Borrar
         </button>
-        <button
-          className="bg-green-500 hover:bg-green-700 text-white font-bold text-xs py-1 px-2 rounded"
-          onClick={() => handleDeleteVehicle(vehicle)}
-        >
-          Seleccionar
-        </button>
       </div>
 
       {isExpanded && (
         <div className={`mt-4`}>
-          <h2 className="text-2xl font-semibold mb-2">{vehicle.brand} {vehicle.model}</h2>
+          <h2 className="text-2xl font-semibold mb-2">{vehicle.make} {vehicle.model}</h2>
           <p>Batería: {vehicle.battery_capacity_kwh}</p>
           <p>Rango: {vehicle.range_kilometers}</p>
         </div>

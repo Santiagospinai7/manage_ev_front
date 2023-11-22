@@ -11,6 +11,7 @@ const DirectionsForm = ({ onSubmit, recommendedRoutes, setRecommendedRoutes, set
     departure: '',
     destination: '',
     batteryLevel: '',
+    electricCarId: '',
   });
 
   const { data: electricVehicles, error, isError, isLoading, isSuccess } = useGetVehiclesQuery('listVehicles', {
@@ -20,11 +21,11 @@ const DirectionsForm = ({ onSubmit, recommendedRoutes, setRecommendedRoutes, set
   });
 
   if (isSuccess) {
-    // console.log('vehicles', electricVehicles)
+    console.log('vehicles', electricVehicles)
   }
 
   const [formVisible, setFormVisible] = useState(true); // Step 1: State variable for form visibility
-
+  const [selectedElectricCar, setSelectedElectricCar] = useState(null);
   const originInputRef = useRef(null);
   const destinationInputRef = useRef(null);
   const [autocompleteServiceDestination, setAutocompleteServiceDestination] = useState(null);
@@ -84,9 +85,6 @@ const DirectionsForm = ({ onSubmit, recommendedRoutes, setRecommendedRoutes, set
       console.error('Geolocation is not supported by this browser');
     }
   };
-  
-  
-  
 
   const handlePlaceChanged = (autocomplete, inputRef) => {
     const place = autocomplete.getPlace();
@@ -100,14 +98,14 @@ const DirectionsForm = ({ onSubmit, recommendedRoutes, setRecommendedRoutes, set
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submit clicked');
-    // setFormVisible(true);
   
     const routeData = {
       departure: formData.departure,
       destination: formData.destination,
       batteryLevel: formData.battery,
+      electricCarId: selectedElectricCar, // Add the selected electric car ID
     };
+  
     onSubmit(routeData);
   };
 
@@ -198,6 +196,24 @@ const DirectionsForm = ({ onSubmit, recommendedRoutes, setRecommendedRoutes, set
                 placeholder="Ingrese destino"
               />
             </Autocomplete>
+          </div>
+          <div className="mb-4">
+            <label htmlFor="electricCar" className="block text-gray-700 font-bold mb-1">Seleccionar coche eléctrico:</label>
+            <select
+              id="electricCar"
+              name="electricCar"
+              value={selectedElectricCar}
+              onChange={(e) => setSelectedElectricCar(e.target.value)}
+              required
+              className="border border-gray-300 rounded w-full py-2 px-3"
+            >
+              <option value="" disabled>Select an electric car</option>
+              {electricVehicles && electricVehicles.map((vehicle) => (
+                <option key={vehicle.id} value={vehicle.id}>
+                  {vehicle.make} - {vehicle.model}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="mb-4">
             <label htmlFor="battery" className="block text-gray-700 font-bold mb-1">Batería:</label>
