@@ -1,5 +1,6 @@
 import Sidebar from '@/components/Sidebar'
 import Navbar from '@/components/Navbar'
+import Downbar from '@/components/Downbar'
 
 export default function mapLayout({ children }) {
   return (
@@ -9,8 +10,7 @@ export default function mapLayout({ children }) {
         <Navbar />
         <div className="mt-16 h-full">{children}</div>
       </div>
+      <Downbar />
     </div>
   );
 }
-
-
