@@ -21,11 +21,18 @@ const RouteCard = ({ selectedRoute, onCancel }) => {
           )
         }
       </p>
-      <p className={`text-gray-700 `}>
-        <span className="font-semibold">Distance:</span> {selectedRoute ? selectedRoute.distancia : ''}
+      {
+        selectedRoute.necesita_recargar ? (
+          <p className={`text-red-500 hidden md:block`}>
+            Pasar por punto de carga
+          </p>   
+        ) : ''
+      }
+      <p className={`text-gray-700`}>
+        <span className="font-semibold hidden md:block">Distance:</span> {selectedRoute ? selectedRoute.distancia : ''}
       </p>
-      <p className={`text-gray-700 `}>
-        <span className="font-semibold">Duration:</span> {selectedRoute ? selectedRoute.duracion : ''}
+      <p className={`text-gray-700`}>
+        <span className="font-semibold hidden md:block">Duration:</span> {selectedRoute ? selectedRoute.duracion : ''}
       </p>
       <div className="flex space-x-4">
         <button
