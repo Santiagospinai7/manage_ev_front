@@ -1,10 +1,10 @@
 'use client'
 
 import React, { useState } from 'react';
-import { GoogleMap, Marker, LoadScript, InfoWindow, DirectionsRenderer, useLoadScript } from '@react-google-maps/api';
+import { GoogleMap, Marker, InfoWindow, DirectionsRenderer, useLoadScript } from '@react-google-maps/api';
 import { useGetChargePointsQuery } from '@/redux/features/chargePointsSlice';
 
-const MapContainer = ({ userLocation, directions, selectedRoute  }) => {
+const MapContainer = ({ userLocation, directions, selectedRoute }) => {
   const enableChargePoint = "https://img.icons8.com/emoji/48/high-voltage.png";
   const disableChargePoint = "https://img.icons8.com/color/48/000000/lightning-bolt.png";
 
@@ -14,7 +14,7 @@ const MapContainer = ({ userLocation, directions, selectedRoute  }) => {
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-    libraries: ['places'],
+    libraries: ['places', 'geometry'],
   });
 
   const handleMarkerClick = (id, lat, lng, name, activate, company) => {

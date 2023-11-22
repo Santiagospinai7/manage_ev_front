@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const RecommendedRoutes = ({ routes, setSelectedRoute }) => {
   const [selectedRouteItem, setSelectedRouteItem] = useState(null);
 
   const handleRouteClick = (route) => {
-    // Log the selected route
-    // console.log('Selected Route:', route);
-    // Update the state with the selected route
     setSelectedRouteItem(route);
     setSelectedRoute(route);
   };
+
+  useEffect(() => {
+    // Assuming you want to select the first route by default
+    if (routes.length > 0) {
+      setSelectedRouteItem(routes[0]);
+      setSelectedRoute(routes[0]);
+    }
+  }, [routes, setSelectedRoute, setSelectedRouteItem]);
 
   return (
     <div className="w-full mt-5 h-48 overflow-y-auto">

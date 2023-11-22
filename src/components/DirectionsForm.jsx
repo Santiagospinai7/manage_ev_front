@@ -6,7 +6,7 @@ import { useGetVehiclesQuery } from '@/redux/features/vehiclesSlice';
 
 import RecommendedRoutes from '@/components/RecommendedRoutes';
 
-const DirectionsForm = ({ onSubmit, recommendedRoutes, setRecommendedRoutes, setSelectedRoute }) => {
+const DirectionsForm = ({ onSubmit, recommendedRoutes, setRecommendedRoutes, setSelectedRoute, handleConfirmRoute, setDirections }) => {
   const [formData, setFormData] = useState({
     departure: '',
     destination: '',
@@ -20,7 +20,7 @@ const DirectionsForm = ({ onSubmit, recommendedRoutes, setRecommendedRoutes, set
   });
 
   if (isSuccess) {
-    console.log('vehicles', electricVehicles)
+    // console.log('vehicles', electricVehicles)
   }
 
   const [formVisible, setFormVisible] = useState(true); // Step 1: State variable for form visibility
@@ -43,6 +43,7 @@ const DirectionsForm = ({ onSubmit, recommendedRoutes, setRecommendedRoutes, set
     // Clear the recommended routes and show the form
     setRecommendedRoutes([]);
     setFormVisible(true);
+    setDirections(null);
   };
 
   const handleSetCurrentPosition = () => {
@@ -111,7 +112,7 @@ const DirectionsForm = ({ onSubmit, recommendedRoutes, setRecommendedRoutes, set
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-    libraries: ['places'],
+    libraries: ['places', 'geometry'],
   });
 
   useEffect(() => {
@@ -213,7 +214,7 @@ const DirectionsForm = ({ onSubmit, recommendedRoutes, setRecommendedRoutes, set
       {isLoaded && formVisible && recommendedRoutes.length > 0 && (
         <div>
           <RecommendedRoutes routes={recommendedRoutes} setSelectedRoute={setSelectedRoute} />
-          <div className="flex justify-end">
+          <div className="flex justify-end mt-5">
             <button
               type="button"
               onClick={handleBack}
@@ -222,7 +223,7 @@ const DirectionsForm = ({ onSubmit, recommendedRoutes, setRecommendedRoutes, set
               Volver
             </button>
             <button
-              type="submit"
+              onClick={handleConfirmRoute}
               className="bg-blue-500 text-white py-2 px-4 rounded-full"
             >
               Confirmar
