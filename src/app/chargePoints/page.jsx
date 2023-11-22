@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
-import { useGetChargePointsQuery } from '@/redux/features/chargePointsSlice';
+import { useGetChargePointsQuery, useDeleteChargePointMutation } from '@/redux/features/chargePointsSlice';
 import ChargePointCard from '@/components/ChargePointCard';
 
 const ChargePointsGrid = () => {
@@ -12,20 +12,21 @@ const ChargePointsGrid = () => {
   });
 
   const [selectedChargePoint, setSelectedChargePoint] = useState(null);
+  const [deleteChargePoint] = useDeleteChargePointMutation();
 
   const handleDetailsClick = (chargePoint) => {
     setSelectedChargePoint(selectedChargePoint === chargePoint ? null : chargePoint);
   };
 
   const handleDeleteChargePoint = async (chargePoint) => {
-    console.log('Deleting vehicle:', chargePoint.vehicle_id);
-    // try {
-    //   await deleteVehicle(vehicle.vehicle_id).unwrap();
+    console.log('Deleting chargePoint:', chargePoint.id);
+    try {
+      await deleteChargePoint(chargePoint.id).unwrap();
 
-    //   window.location.reload();
-    // } catch (error) {
-    //   console.error(error);
-    // }
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   let content;
