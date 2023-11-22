@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
-import { useGetVehiclesQuery } from '@/redux/features/vehiclesSlice';
+import { useGetVehiclesQuery, useDeleteVehicleMutation } from '@/redux/features/vehiclesSlice';
 import VehicleCard from '@/components/VehicleCard';
 
 const ListVehicles = () => {
@@ -10,6 +10,19 @@ const ListVehicles = () => {
     refetchOnFocus: false,
     pollingInterval: 300000
   });
+
+  const [deleteVehicle] = useDeleteVehicleMutation();
+
+  const handleDeleteVehicle = async (vehicle) => {
+    console.log('Deleting vehicle:', vehicle.vehicle_id);
+    try {
+      await deleteVehicle(vehicle.vehicle_id).unwrap();
+
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const [expandedCardIndex, setExpandedCardIndex] = useState(null);
 
@@ -42,7 +55,7 @@ const ListVehicles = () => {
           <div className="flex justify-between items-center bg-blue-500 mx-10 p-2 rounded-full">
             <div>
             </div>
-            <a href="/chargePoints/new" className="text-white pr-4">+ Nuevo vehículo</a>
+            <a href="/vehicles/new" className="text-white pr-4">+ Nuevo vehículo</a>
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-10 mb-4">
@@ -53,6 +66,7 @@ const ListVehicles = () => {
               index={index}
               isExpanded={expandedCardIndex === index}
               handleDetailsClick={() => handleDetailsClick(index)}
+              handleDeleteVehicle={handleDeleteVehicle}
             />
           ))}
         </div>

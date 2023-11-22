@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 const DEFAULT_VEHICLE_IMAGE = 'https://i.pinimg.com/564x/f1/9e/4f/f19e4f665f2c7528e72df51b28e660f7.jpg';
 
-const VehicleCard = ({ vehicle, index, isExpanded, handleDetailsClick }) => {
+const VehicleCard = ({ vehicle, index, isExpanded, handleDetailsClick, handleDeleteVehicle }) => {
   return (
     <div
     key={index}

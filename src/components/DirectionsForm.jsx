@@ -207,7 +207,7 @@ const DirectionsForm = ({ onSubmit, recommendedRoutes, setRecommendedRoutes, set
               required
               className="border border-gray-300 rounded w-full py-2 px-3"
             >
-              <option value="" disabled>Select an electric car</option>
+              <option value="" disabled>Seleccionar un carro</option>
               {electricVehicles && electricVehicles.map((vehicle) => (
                 <option key={vehicle.id} value={vehicle.id}>
                   {vehicle.make} - {vehicle.model}
