@@ -72,32 +72,6 @@ const Map = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   if (selectedRoute) {
-  //     console.log('Selected Route:', selectedRoute);
-  //     const polyline = selectedRoute.informacion_ruta.overview_polyline;
-  //     const arrayPath = google.maps.geometry.encoding.decodePath(polyline);
-
-  //     const directionsService = new window.google.maps.DirectionsService();
-  //     directionsService.route(
-  //       {
-  //         origin: arrayPath[0],
-  //         destination: arrayPath[arrayPath.length - 1],
-  //         provideRouteAlternatives: true,
-  //         travelMode: 'DRIVING',
-  //       },
-  //       (response, status) => {
-  //         if (status === 'OK') {
-  //           response.routes = response.routes.filter((route) => route.overview_polyline === polyline); 
-  //           setDirections(response);
-  //         } else {
-  //           console.error('Error getting directions:', status);
-  //         }
-  //       }
-  //     );
-  //   }
-  // }, [selectedRoute]);
-
   useEffect(() => {
     if (selectedRoute && isSuccess) {
       const polyline = selectedRoute.informacion_ruta.overview_polyline;

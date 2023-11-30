@@ -44,7 +44,7 @@ const RecommendedRoutes = ({ routes, setSelectedRoute }) => {
             </div>
             <p className="text-lg font-bold mb-1">Ruta {route.numero_ruta}, {route.distancia}</p>
             <p className="text-gray-600">{route.duracion}</p>
-            <p className="text-gray-600">Consumo: {route.consumo_ajustado.toFixed(2)} %</p>
+            <p className="text-gray-600">Consumo: {route.porcentaje_bateria_necesario.toFixed(2)} %</p>
             {route.necesita_recargar && (
               <p className="text-xs text-red-500 font-bold">Necesitas recargar, falta: {route.porcentaje_recargar.toFixed(2)}%</p>
             )}
